@@ -1,0 +1,23 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    restart: unless-stopped
+    ports:
+      - "1339:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD:-rootpassword}
+      MARIADB_DATABASE: ${DATABASE_NAME:-strapi}
+      MARIADB_USER: ${DATABASE_USERNAME:-strapi}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD:-strapi}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mariadb_data:
+    driver: local
