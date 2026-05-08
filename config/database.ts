@@ -3,6 +3,7 @@ import type { Core } from '@strapi/strapi';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database => {
   const client = env('DATABASE_CLIENT', 'sqlite');
+  const isProduction = env('NODE_ENV') === 'production';
 
   const connections = {
     mysql: {
@@ -31,7 +32,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
         database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
-        ssl: env.bool('DATABASE_SSL', false)
+        ssl: env.bool('DATABASE_SSL', isProduction)
           ? {
               key: env('DATABASE_SSL_KEY', undefined),
               cert: env('DATABASE_SSL_CERT', undefined),
