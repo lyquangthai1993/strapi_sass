@@ -14,6 +14,8 @@ services:
       - key: DATABASE_CLIENT
         value: postgres
       - key: DATABASE_SSL
-        value: true
+        value: "true"
       - key: DATABASE_SSL_REJECT_UNAUTHORIZED
-        value: false
+        value: "false"
+      - key: USERS_PERMISSIONS_JWT_SECRET
+        value: qQdELFXPlmGRNXZwzCTow1KxHaREs65WBICzDmUjBp0=
