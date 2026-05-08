@@ -67,6 +67,9 @@ DATABASE_URL=<Internal Database URL từ Bước 1>
 DATABASE_SSL=true
 ```
 
+> **Quan trọng:** Phải dùng **Internal Database URL**, không phải External URL. Copy từ tab **Info** của PostgreSQL service → mục **Internal Database URL**.
+> Internal: `postgresql://user:pass@dpg-xxx-a/dbname` — External (sai): `postgresql://user:pass@dpg-xxx-a.singapore-postgres.render.com/dbname`
+
 > Render PostgreSQL **bắt buộc SSL** — không set hoặc set `false` sẽ lỗi `SSL/TLS required` khi start.
 >
 > `config/database.ts` đã hỗ trợ `connectionString` — chỉ cần set `DATABASE_URL` là đủ, không cần set host/port/name riêng lẻ.
